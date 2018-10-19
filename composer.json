@@ -1,0 +1,23 @@
+{
+  "name": "toy-php/youtrack-client",
+  "description": "Клиент API youtrack",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Сейтумеров Мустафа",
+      "email": "seymus007@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "cybercog/youtrack-rest-php": "^6.1"
+  },
+  "autoload": {
+    "psr-0": {
+      "": [
+        "src/"
+      ]
+    }
+  }
+}
