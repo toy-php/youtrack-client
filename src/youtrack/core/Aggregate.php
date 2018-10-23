@@ -2,7 +2,7 @@
 
 namespace youtrack\core;
 
-abstract class Aggregate extends Entity
+trait Aggregate
 {
     /**
      * Имя ресурса агрегата

@@ -71,14 +71,15 @@ class Query implements QueryInterface
     }
 
     /**
-     * Получить массив сущностей
-     * @return array | EntityInterface[]
-     * @throws Exception
+     * @inheritdoc
      */
-    public function all(): array
+    public function all(array $params = []): array
     {
         $query = build_query($this->queryConfig);
-        $uri = $this->api->createUri(trim($this->resource, '/'))->withQuery($query);
+        $resource = str_replace (array_map(function ($key){
+            return '{' . $key . '}';
+        }, array_keys($params)), array_values($params), $this->resource);
+        $uri = $this->api->createUri(trim($resource, '/'))->withQuery($query);
         $response = $this->api->get($uri);
         $result = [];
         foreach ($response as $item) {

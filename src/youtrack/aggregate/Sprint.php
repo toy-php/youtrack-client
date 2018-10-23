@@ -3,9 +3,9 @@
 namespace youtrack\aggregate;
 
 use youtrack\core\Aggregate;
-use youtrack\entity\Issue as BaseIssue;
+use youtrack\entity\Sprint as BaseSprint;
 
-class Issue extends BaseIssue
+class Sprint extends BaseSprint
 {
 
     use Aggregate;
@@ -16,6 +16,7 @@ class Issue extends BaseIssue
      */
     static public function resource(): string
     {
-        return 'issues';
+       return 'agiles/{id}/sprints';
     }
+
 }

@@ -28,3 +28,6 @@ phpunit.phar
 /phpunit.xml
 
 *.lock
+
+# Тестирование запросов
+index.php

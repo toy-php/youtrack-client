@@ -35,9 +35,10 @@ interface QueryInterface
 
     /**
      * Получить массив сущностей
-     * @return array | EntityInterface[]
+     * @param array $params
+     * @return array
      */
-    public function all(): array;
+    public function all(array $params = []): array;
 
     /**
      * Получить одну сущность

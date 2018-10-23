@@ -3,9 +3,9 @@
 namespace youtrack\aggregate;
 
 use youtrack\core\Aggregate;
-use youtrack\entity\Issue as BaseIssue;
+use youtrack\core\Entity;
 
-class Issue extends BaseIssue
+class Agile extends Entity
 {
 
     use Aggregate;
@@ -16,6 +16,6 @@ class Issue extends BaseIssue
      */
     static public function resource(): string
     {
-        return 'issues';
+        return 'agiles';
     }
 }

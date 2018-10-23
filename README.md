@@ -17,7 +17,7 @@ composer require toy-php/youtrack-client
 ## Использование
 
 ```php
-$projects = \youtrack\aggregate\Issue::find()
+$issues = \youtrack\aggregate\Issue::find()
     ->fields('id,summary,project(name)')
     ->top(10)
     ->all();
