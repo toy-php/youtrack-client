@@ -43,8 +43,9 @@ interface QueryInterface
     /**
      * Получить одну сущность
      * @param string $id
+     * @param array $params
      * @return EntityInterface
      */
-    public function one(string $id): EntityInterface;
+    public function one(string $id, array $params = []): EntityInterface;
 
 }

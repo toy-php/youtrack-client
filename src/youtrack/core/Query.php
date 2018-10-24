@@ -3,6 +3,7 @@
 namespace youtrack\core;
 
 use function GuzzleHttp\Psr7\build_query;
+use Psr\Http\Message\UriInterface;
 
 class Query implements QueryInterface
 {
@@ -70,16 +71,21 @@ class Query implements QueryInterface
         return $this;
     }
 
+    protected function createUri(array $params): UriInterface
+    {
+        $query = build_query($this->queryConfig);
+        $resource = preg_replace('#\{[\w]+\}#iu', '', str_replace (array_map(function ($key){
+            return '{' . $key . '}';
+        }, array_keys($params)), array_values($params), $this->resource));
+        return $this->api->createUri(trim($resource, '/'))->withQuery($query);
+    }
+
     /**
      * @inheritdoc
      */
     public function all(array $params = []): array
     {
-        $query = build_query($this->queryConfig);
-        $resource = str_replace (array_map(function ($key){
-            return '{' . $key . '}';
-        }, array_keys($params)), array_values($params), $this->resource);
-        $uri = $this->api->createUri(trim($resource, '/'))->withQuery($query);
+        $uri = $this->createUri($params);
         $response = $this->api->get($uri);
         $result = [];
         foreach ($response as $item) {
@@ -91,13 +97,15 @@ class Query implements QueryInterface
     /**
      * Получить одну сущность
      * @param string $id
+     * @param array $params
      * @return EntityInterface
      * @throws Exception
      */
-    public function one(string $id): EntityInterface
+    public function one(string $id, array $params = []): EntityInterface
     {
-        $query = build_query($this->queryConfig);
-        $uri = $this->api->createUri(sprintf('%s/%s', trim($this->resource, '/'), $id))->withQuery($query);
+        $uri = $this->createUri(array_merge([
+            'id' => $id
+        ], $params));
         $response = $this->api->get($uri);
         return $this->entityFactory->create($response);
     }

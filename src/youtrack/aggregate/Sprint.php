@@ -16,7 +16,7 @@ class Sprint extends BaseSprint
      */
     static public function resource(): string
     {
-       return 'agiles/{id}/sprints';
+       return 'agiles/{agileId}/sprints/{id}';
     }
 
 }
