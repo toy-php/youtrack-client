@@ -4,6 +4,9 @@ namespace youtrack\aggregate;
 
 use youtrack\core\Aggregate;
 use youtrack\core\Entity;
+use youtrack\entity\Issue;
+use youtrack\entity\Project;
+use youtrack\entity\Sprint;
 
 /**
  * Class Agile
@@ -11,8 +14,9 @@ use youtrack\core\Entity;
  *
  * @property string $id
  * @property string $name
- * @property \youtrack\entity\Sprint[] $sprints
- * @property \youtrack\entity\Project[] $projects
+ * @property Sprint[] $sprints
+ * @property Project[] $projects
+ * @property Issue[] $issues
  *
  */
 class Agile extends Entity
