@@ -10,13 +10,13 @@ abstract class Entity extends BaseObject implements EntityInterface
     /**
      * @inheritdoc
      */
-    public function __get(string $name)
+    public function &__get(string $name)
     {
         try {
             return parent::__get($name);
         } catch (UnknownPropertyException $exception) {
             if (isset($this->data[$name])) {
-                return is_array($this->data[$name]) ? new ActiveArray(&$this->data[$name]) : $this->data[$name];
+                return $this->data[$name];
             }
             throw $exception;
         }
